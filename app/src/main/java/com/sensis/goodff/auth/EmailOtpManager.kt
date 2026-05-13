@@ -74,6 +74,7 @@ object EmailOtpManager {
             val request = Request.Builder()
                 .url("https://api.emailjs.com/api/v1.0/email/send")
                 .post(body.toRequestBody("application/json".toMediaType()))
+                .header("origin", "https://localhost")
                 .build()
 
             val response = client.newCall(request).execute()
