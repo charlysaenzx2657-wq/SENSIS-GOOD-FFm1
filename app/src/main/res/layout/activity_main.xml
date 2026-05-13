@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- HEADER -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SENSIS GOOD FF"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@color/accent_blue"
+            android:paddingTop="24dp"
+            android:paddingBottom="4dp"
+            android:letterSpacing="0.15"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GENERADOR DE SENSIBILIDADES"
+            android:textSize="10sp"
+            android:gravity="center"
+            android:textColor="@color/text_soft"
+            android:letterSpacing="0.3"
+            android:paddingBottom="20dp"/>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- SCREEN: LOGIN -->
+        <!-- ═══════════════════════════════════════════════ -->
+        <LinearLayout
+            android:id="@+id/screenLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_bg"
+            android:padding="24dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🔐 ACCESO EXCLUSIVO"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/accent_blue"
+                android:letterSpacing="0.15"
+                android:paddingBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Solicita acceso al administrador.\nSe enviará un código a su correo."
+                android:textSize="13sp"
+                android:gravity="center"
+                android:textColor="@color/text_soft"
+                android:paddingBottom="20dp"/>
+
+            <Button
+                android:id="@+id/btnSendOtp"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="📧 SOLICITAR CÓDIGO DE ACCESO"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/accent_blue"
+                android:letterSpacing="0.1"/>
+
+            <ProgressBar
+                android:id="@+id/progressOtp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/tvOtpStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:textColor="@color/text_soft"
+                android:padding="8dp"/>
+
+            <!-- Input del código OTP (oculto hasta que se envíe) -->
+            <LinearLayout
+                android:id="@+id/layoutOtpInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CÓDIGO DE 6 DÍGITOS"
+                    android:textSize="10sp"
+                    android:textColor="@color/text_soft"
+                    android:letterSpacing="0.3"
+                    android:paddingBottom="6dp"/>
+
+                <EditText
+                    android:id="@+id/etOtpCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:hint="000000"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="@color/text_main"
+                    android:backgroundTint="@color/accent_blue"
+                    android:textColorHint="@color/text_soft"/>
+
+                <Button
+                    android:id="@+id/btnVerifyOtp"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:text="✅ VERIFICAR CÓDIGO"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/green_ok"
+                    android:layout_marginTop="10dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- SCREEN: GENERATOR -->
+        <!-- ═══════════════════════════════════════════════ -->
+        <LinearLayout
+            android:id="@+id/screenGenerator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!-- Card: Selector de marca -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_bg"
+                android:padding="20dp"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="MARCA DEL DISPOSITIVO"
+                    android:textSize="10sp"
+                    android:textColor="@color/text_soft"
+                    android:letterSpacing="0.3"
+                    android:paddingBottom="8dp"/>
+
+                <Spinner
+                    android:id="@+id/spinnerMarca"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:backgroundTint="@color/accent_blue"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="MODELO"
+                    android:textSize="10sp"
+                    android:textColor="@color/text_soft"
+                    android:letterSpacing="0.3"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/etModelo"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:hint="Ej: A54, Redmi Note 12..."
+                    android:textSize="15sp"
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_soft"
+                    android:backgroundTint="@color/accent_blue"/>
+
+                <!-- Switch DPI -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="14dp"
+                    android:gravity="center_vertical">
+
+                    <Switch
+                        android:id="@+id/switchDpi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:thumbTint="@color/accent_blue"
+                        android:trackTint="@color/text_soft"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="  INCLUIR DPI"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_soft"
+                        android:letterSpacing="0.2"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="#FF5566"
+                    android:gravity="center"
+                    android:paddingTop="8dp"
+                    android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/btnGenerar"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="⚡ GENERAR SENSIBILIDADES"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/accent_blue"
+                    android:layout_marginTop="14dp"
+                    android:letterSpacing="0.1"/>
+            </LinearLayout>
+
+            <!-- Card: Resultado -->
+            <LinearLayout
+                android:id="@+id/cardResultado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_result_bg"
+                android:padding="20dp"
+                android:layout_marginBottom="12dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvResultado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:textSize="13sp"
+                    android:textColor="@color/text_main"
+                    android:lineSpacingMultiplier="1.4"/>
+
+                <Button
+                    android:id="@+id/btnCopiar"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="📋 COPIAR"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/green_ok"
+                    android:layout_marginTop="12dp"/>
+            </LinearLayout>
+
+            <!-- Cerrar sesión -->
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:text="Cerrar sesión"
+                android:textSize="12sp"
+                android:textColor="@color/text_soft"
+                android:backgroundTint="@color/bg_dark"
+                android:layout_marginBottom="20dp"/>
+
+        </LinearLayout>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- SCREEN: TAMPER (APK modificado) -->
+        <!-- ═══════════════════════════════════════════════ -->
+        <LinearLayout
+            android:id="@+id/screenTamper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone"
+            android:padding="32dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="⛔"
+                android:textSize="64sp"
+                android:gravity="center"
+                android:paddingBottom="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="APLICACIÓN MODIFICADA"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="#FF5566"
+                android:paddingBottom="12dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Esta versión de la app ha sido alterada\ny no puede ejecutarse."
+                android:textSize="14sp"
+                android:gravity="center"
+                android:textColor="@color/text_soft"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

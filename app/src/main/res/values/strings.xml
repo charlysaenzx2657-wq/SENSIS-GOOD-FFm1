@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SENSIS GOOD FF</string>
+
+    <!-- Marcas spinner -->
+    <string-array name="marcas">
+        <item>Selecciona tu marca</item>
+        <item>Samsung</item>
+        <item>Xiaomi</item>
+        <item>Poco</item>
+        <item>Redmi</item>
+        <item>Realme</item>
+        <item>Oppo</item>
+        <item>Vivo</item>
+        <item>Honor</item>
+        <item>Huawei</item>
+        <item>Motorola</item>
+        <item>Nokia</item>
+        <item>LG</item>
+        <item>HTC</item>
+        <item>Asus</item>
+        <item>Lenovo</item>
+        <item>Google Pixel</item>
+        <item>OnePlus</item>
+        <item>Sony</item>
+        <item>Razer</item>
+        <item>Infinix</item>
+        <item>Tecno</item>
+        <item>Itel</item>
+        <item>Alcatel</item>
+        <item>BLU</item>
+        <item>Wiko</item>
+        <item>Blackview</item>
+        <item>iPhone</item>
+        <item>SENSI PREMIUM</item>
+        <item>SENSI XIT</item>
+        <item>Sensibilidad VIP</item>
+        <item>Teléfono Modificado ☠️</item>
+    </string-array>
+</resources>
