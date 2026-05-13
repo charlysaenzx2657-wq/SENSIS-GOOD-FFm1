@@ -79,7 +79,7 @@ object EmailOtpManager {
 
             val response = client.newCall(request).execute()
             if (response.isSuccessful) Result.success(Unit)
-            else Result.failure(Exception("EmailJS error ${response.code}"))
+            else Result.failure(Exception("EmailJS error ${response.code}: ${response.body?.string()}"))
         } catch (e: Exception) {
             Result.failure(e)
         }

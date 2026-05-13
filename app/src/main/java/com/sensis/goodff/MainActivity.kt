@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                     b.tvOtpStatus.text = "✅ Código enviado al correo del administrador"
                     b.layoutOtpInput.visibility = View.VISIBLE
                 } else {
-                    b.tvOtpStatus.text = "❌ Error al enviar. Verifica tu conexión."
+                    b.tvOtpStatus.text = "❌ ${result.exceptionOrNull()?.message}"
                 }
             }
         }
