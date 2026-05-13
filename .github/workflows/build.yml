@@ -1,9 +1,7 @@
-name: Build & Sign APK
+name: Build APK
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
     branches: [ main ]
   workflow_dispatch:
 
@@ -28,85 +26,30 @@ jobs:
       - name: Hacer ejecutable gradlew
         run: chmod +x ./gradlew
 
-      # Decodificar keystore desde Secret de GitHub
-      - name: Decodificar Keystore
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug
+
+      - name: Renombrar APK
         run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > app/keystore.jks
+          mv app/build/outputs/apk/debug/app-debug.apk \
+             app/build/outputs/apk/debug/SensisGoodFF-v3.2.apk
 
-      # Obtener SHA-256 del certificado y reemplazarlo en el código fuente
-      - name: Extraer hash del certificado de firma
-        run: |
-          CERT_HASH=$(keytool -list -v \
-            -keystore app/keystore.jks \
-            -alias "${{ secrets.KEY_ALIAS }}" \
-            -storepass "${{ secrets.KEYSTORE_PASS }}" \
-            -keypass "${{ secrets.KEY_PASS }}" \
-            2>/dev/null | grep "SHA256:" | head -1 | sed 's/.*SHA256: //' | tr -d ':' | tr '[:upper:]' '[:lower:]')
-          echo "CERT_HASH=$CERT_HASH" >> $GITHUB_ENV
-          echo "Hash del certificado: $CERT_HASH"
-
-      # Inyectar el hash real en AppIntegrity.kt antes de compilar
-      - name: Inyectar hash de certificado en código
-        run: |
-          sed -i "s/BUILD_CERT_HASH_PLACEHOLDER/${{ env.CERT_HASH }}/g" \
-            app/src/main/java/com/sensis/goodff/security/AppIntegrity.kt
-
-      - name: Build Release APK
-        env:
-          KEYSTORE_PATH: keystore.jks
-          KEYSTORE_PASS: ${{ secrets.KEYSTORE_PASS }}
-          KEY_ALIAS:     ${{ secrets.KEY_ALIAS }}
-          KEY_PASS:      ${{ secrets.KEY_PASS }}
-        run: ./gradlew assembleRelease
-
-      - name: Build Release AAB (Play Store)
-        env:
-          KEYSTORE_PATH: keystore.jks
-          KEYSTORE_PASS: ${{ secrets.KEYSTORE_PASS }}
-          KEY_ALIAS:     ${{ secrets.KEY_ALIAS }}
-          KEY_PASS:      ${{ secrets.KEY_PASS }}
-        run: ./gradlew bundleRelease
-
-      - name: Renombrar APK con versión
-        run: |
-          mv app/build/outputs/apk/release/app-release.apk \
-             app/build/outputs/apk/release/SensisGoodFF-v3.2-release.apk
-
-      - name: Subir APK como artifact
+      - name: Subir APK
         uses: actions/upload-artifact@v4
         with:
           name: SensisGoodFF-APK
-          path: app/build/outputs/apk/release/SensisGoodFF-v3.2-release.apk
+          path: app/build/outputs/apk/debug/SensisGoodFF-v3.2.apk
           retention-days: 30
 
-      - name: Subir AAB como artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: SensisGoodFF-AAB
-          path: app/build/outputs/bundle/release/app-release.aab
-          retention-days: 30
-
-      # Crear Release en GitHub automáticamente en push a main
-      - name: Crear GitHub Release
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      - name: Crear Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v3.2-${{ github.run_number }}
           name: "SENSIS GOOD FF v3.2 (Build ${{ github.run_number }})"
           body: |
             ## ⚡ SENSIS GOOD FF v3.2
-            
-            - ✅ APK firmado con keystore oficial
-            - 🔐 Verificación de integridad activa
-            - 📧 Acceso por código OTP via email
             - 🎯 Generador de sensibilidades nativo Kotlin
-          files: |
-            app/build/outputs/apk/release/SensisGoodFF-v3.2-release.apk
-            app/build/outputs/bundle/release/app-release.aab
+            - 📧 Acceso por código OTP via email
+          files: app/build/outputs/apk/debug/SensisGoodFF-v3.2.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # Limpiar keystore del runner (seguridad)
-      - name: Limpiar keystore
-        if: always()
-        run: rm -f app/keystore.jks
