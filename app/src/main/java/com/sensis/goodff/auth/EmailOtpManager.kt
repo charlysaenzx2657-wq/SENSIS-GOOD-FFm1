@@ -17,9 +17,9 @@ import kotlin.random.Random
 object EmailOtpManager {
 
     // ── EmailJS config ──────────────────────────────────────────
-    private const val EMAILJS_SERVICE_ID  = "YOUR_SERVICE_ID"   // <-- tu Service ID
-    private const val EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID"  // <-- tu Template ID
-    private const val EMAILJS_PUBLIC_KEY  = "YOUR_PUBLIC_KEY"   // <-- tu Public Key
+    private const val EMAILJS_SERVICE_ID  = "service_fp49ijg"   // <-- tu Service ID
+    private const val EMAILJS_TEMPLATE_ID = "template_430q62h"  // <-- tu Template ID
+    private const val EMAILJS_PUBLIC_KEY  = "YNPoHuNx2oA3WGu4I"   // <-- tu Public Key
     private const val OWNER_EMAIL         = "charlysaenzx2657@gmail.com"
     // ────────────────────────────────────────────────────────────
 
